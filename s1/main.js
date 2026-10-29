@@ -1,27 +1,35 @@
 
+import { Conta } from './Conta.js';
 import { ContaCorrente } from './ContaCorrente.js';
 import { ContaPoupanca } from './ContaPoupanca.js';
-import { Conta } from './Conta.js';
 
-const cc = new ContaCorrente('0001', 'Ana Lima', 500);
-const cp = new ContaPoupanca('0002', 'Bruno Souza');
+const contas = [
+  new ContaCorrente('0001', 'Ana Lima', 500),
+  new ContaPoupanca('0002', 'Bruno Souza'),
+];
 
-cc.depositar(100);
-cc.sacar(400);
+contas.forEach((c) => c.depositar(1000));
 
-console.log('CC saldo:', cc.saldo);
+// A mesma mensagem, com respostas diferentes.
+function fecharMes(listaDeContas) {
+  for (const conta of listaDeContas) {
+    const tarifa = conta.tarifaMensal();
 
-cp.depositar(1000);
-console.log('Rendeu:', cp.render(), '→ saldo:', cp.saldo);
+    if (tarifa > 0) {
+      conta.sacar(tarifa);
+    }
 
-try {
-  cp.sacar(5000);
-} catch (e) {
-  console.log('Poupança →', e.message);
+    console.log(
+      `${conta} (tarifa: R$ ${tarifa.toFixed(2)})`
+    );
+  }
 }
 
-console.log(cc instanceof ContaCorrente, cc instanceof Conta);
+fecharMes(contas);
 
-console.log(
-  Object.getPrototypeOf(ContaCorrente.prototype) === Conta.prototype
-);
+// Teste: não é permitido criar uma conta genérica.
+try {
+  new Conta('0003', 'Carla Dias');
+} catch (e) {
+  console.log('Erro esperado →', e.message);
+}

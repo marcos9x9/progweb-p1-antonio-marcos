@@ -16,4 +16,8 @@ export class ContaPoupanca extends Conta {
 
     return rendimento;
   }
+
+  tarifaMensal() {
+    return 0;
+    }
 }
