@@ -1,5 +1,4 @@
 
- // s1/main.js — v1
 import { Conta } from './Conta.js';
 
 const c1 = new Conta('0001', 'Ana Lima');
@@ -9,10 +8,9 @@ c1.depositar(100);
 c1.sacar(30);
 
 console.log(c1);
+console.log('Saldo da c1:', c1.saldo);
 console.log('Saldo da c2:', c2.saldo);
 
-// Cada objeto tem o seu próprio estado
-// class é açúcar sobre protótipos
 console.log(typeof Conta);
 console.log(Object.getPrototypeOf(c1) === Conta.prototype);
 console.log(Object.hasOwn(c1, 'sacar'));
