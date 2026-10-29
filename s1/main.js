@@ -1,16 +1,27 @@
 
+import { ContaCorrente } from './ContaCorrente.js';
+import { ContaPoupanca } from './ContaPoupanca.js';
 import { Conta } from './Conta.js';
 
-const c1 = new Conta('0001', 'Ana Lima');
-const c2 = new Conta('0002', 'Bruno Souza');
+const cc = new ContaCorrente('0001', 'Ana Lima', 500);
+const cp = new ContaPoupanca('0002', 'Bruno Souza');
 
-c1.depositar(100);
-c1.sacar(30);
+cc.depositar(100);
+cc.sacar(400);
 
-console.log(c1);
-console.log('Saldo da c1:', c1.saldo);
-console.log('Saldo da c2:', c2.saldo);
+console.log('CC saldo:', cc.saldo);
 
-console.log(typeof Conta);
-console.log(Object.getPrototypeOf(c1) === Conta.prototype);
-console.log(Object.hasOwn(c1, 'sacar'));
+cp.depositar(1000);
+console.log('Rendeu:', cp.render(), '→ saldo:', cp.saldo);
+
+try {
+  cp.sacar(5000);
+} catch (e) {
+  console.log('Poupança →', e.message);
+}
+
+console.log(cc instanceof ContaCorrente, cc instanceof Conta);
+
+console.log(
+  Object.getPrototypeOf(ContaCorrente.prototype) === Conta.prototype
+);
